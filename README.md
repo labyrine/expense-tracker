@@ -21,24 +21,24 @@ Sovelluksessa toimii tällä hetkellä rekisteröityminen sekä kirjautuminen si
 **Ohjeet sovelluksen testaamiseen**
 
 Kloonaa tämä repositorio omalle koneellesi komennolla
-$ git clone https://github.com/labyrine/expense-tracker 
+$ git clone https://github.com/labyrine/expense-tracker. 
 Tämä luo juurikansion expense-tracker. Siirry sen sisälle.
 
 Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
-DATABASE_URL=<tietokannan-paikallinen-osoite>
-SECRET_KEY=<salainen-avain>
+DATABASE_URL=\<tietokannan-paikallinen-osoite\>
+SECRET_KEY=\<salainen-avain\>
 
 (Ohje Linuxille)
-Sitten aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla
-$ python3 -m venv venv
-$ source venv/bin/activate
-$ pip install -r ./requirements.txt
+  Sitten aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla
+  $ python3 -m venv venv
+  $ source venv/bin/activate
+  $ pip install -r ./requirements.txt
 
 Määritä tietokannan skeema komennolla
-$ psql < schema.sql
+  $ psql < schema.sql
 
 Sovelluksen voi käynnistää komennolla
-$ flask run
+  $ flask run
                    
 ***Suunnitelma tietokannan rakenteelle***
 
