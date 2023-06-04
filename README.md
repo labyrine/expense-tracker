@@ -14,6 +14,32 @@ Sovelluksen ominaisuuksia
 - Käyttäjä voi hakea kuukaudelta, että paljonko hän on plussalla tai miinuksella
 - Käyttäjä voi asettaa itselleen budjetin tietylle aikavälille tai kategorialle, jonka ylittämisestä sovellus kertoo
 
+**Sovelluksen nykyinen tilanne**
+
+Sovelluksessa toimii tällä hetkellä rekisteröityminen sekä kirjautuminen sisään ja ulos. 
+
+**Ohjeet sovelluksen testaamiseen**
+
+Kloonaa tämä repositorio omalle koneellesi komennolla
+$ git clone https://github.com/labyrine/expense-tracker 
+Tämä luo juurikansion expense-tracker. Siirry sen sisälle.
+
+Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
+DATABASE_URL=<tietokannan-paikallinen-osoite>
+SECRET_KEY=<salainen-avain>
+
+(Ohje Linuxille)
+Sitten aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -r ./requirements.txt
+
+Määritä tietokannan skeema komennolla
+$ psql < schema.sql
+
+Sovelluksen voi käynnistää komennolla
+$ flask run
+                   
 ***Suunnitelma tietokannan rakenteelle***
 
 **Taulut**
