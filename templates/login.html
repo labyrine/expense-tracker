@@ -3,15 +3,70 @@
   <head>
     <meta charset="utf-8">
     <title>Kirjautuminen</title>
+    <link rel="stylesheet" href="main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        background: rgb(65, 179, 163);
+      }
+
+      .main_box {
+        background: white;
+        padding: 20px;
+        border: 1px solid black;
+        border-radius: .5em;
+        max-width: 45em;
+        text-align: center;
+      }
+
+      .form_box {
+        background: white;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: .5em;
+        margin-bottom: 10px;
+      }
+
+      input[type="submit"] {
+        background: rgb(133, 220, 186);
+        padding: 5px 10px;
+        border: 1px solid black;
+        color: solid black;
+      }
+
+      a {
+        color: rgb(195, 141, 158);
+        text-decoration: none;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <form action="/login" method="post">
-      Tunnus: <input type="text" name="username">
-      <p>
-      Salasana: <input type="password" name="password">
-      <p>
-      <input type="submit" value="Kirjaudu">
-    </form>
-    Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
+      <div class="main_box">
+        <h1>Rahankäytön seuranta</h1>
+        <div class="form_box">
+          <h2>Kirjaudu sisään</h2>
+          <div>
+            <p>Käyttäjänimi:</p>
+            <input type="text" name="username">
+          </div>
+          <div>
+            <p>Salasana:</p>
+            <input type="password" name="password">
+          </div>
+          <p>
+            <input type="submit" value="Kirjaudu">
+          </p>
+        </div>
+      </form>
+      Jos sinulla ei ole profiilia, voit luoda uuden <a href="/register">tästä</a>
+    </div>
   </body>
 </html>
