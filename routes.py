@@ -64,3 +64,7 @@ def create_expense_route():
     else:
         expense_categories = create_transactions.get_expense_categories()
         return render_template('create_transactions.html', form_type='expense', expense_categories=expense_categories)
+    
+@app.route("/history", methods=["GET", "POST"])
+def history():
+    return render_template("history.html")
