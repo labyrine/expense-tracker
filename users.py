@@ -43,3 +43,6 @@ def get_username():
             return user.username
     return None
 
+def user_id():
+    return session.get("user_id",0)
+

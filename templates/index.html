@@ -5,10 +5,16 @@
     <title>Etusivu</title>
   </head>
   <body>
-    <h1>Tervetuloa seuraamaan tulojasi ja menojasi!</h1>
+    <h1>Rahankäytön seuranta</h1>
+    <p>
+      <h1>Tervetuloa seuraamaan tulojasi ja menojasi!</h1>
+    </p>
     {% if message %}
         <p><i>Kirjautuneena:</i> <b>{{ message }}</b></p>
         <p>Kirjaudu ulos <a href="/logout">tästä</a></p>
+        <p>Luo uusi</p>
+    <button onclick="location.href='/create_income'">Tulo</button>
+    <button onclick="location.href='/create_expense'">Meno</button>
     {% else %}
         <p>Kirjaudu sisään <a href="/login">tästä</a> jatkaaksesi</p>
     {% endif %}

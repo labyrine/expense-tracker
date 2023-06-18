@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect
-import users
+import users, create_transactions
 
 @app.route("/")
 def index():
@@ -38,3 +38,29 @@ def register():
             return redirect("/")
         else:
             return render_template("error.html", message="Rekisteröinti ei onnistunut")
+        
+@app.route("/create_income", methods=["GET", "POST"])
+def create_income_route():
+    if request.method == 'POST':
+        description = request.form.get('description')
+        amount = request.form.get('amount')
+        date = request.form.get('date')
+        income_category = request.form.get('income_category')
+        create_transactions.insert_income(amount, date, income_category, description)
+        return redirect('/')
+    else:
+        income_categories = create_transactions.get_income_categories()
+        return render_template('create_transactions.html', form_type='income', income_categories=income_categories)
+
+@app.route("/create_expense", methods=["GET", "POST"])
+def create_expense_route():
+    if request.method == 'POST':
+        description = request.form.get('description')
+        amount = request.form.get('amount')
+        date = request.form.get('date')
+        expense_category = request.form.get('expense_category')
+        create_transactions.insert_expense(amount, date, expense_category, description)
+        return redirect('/')
+    else:
+        expense_categories = create_transactions.get_expense_categories()
+        return render_template('create_transactions.html', form_type='expense', expense_categories=expense_categories)
