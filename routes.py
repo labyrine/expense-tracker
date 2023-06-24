@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template, request, redirect
 import users, create_transactions
+from history import get_transactions, delete_transaction
 
 @app.route("/")
 def index():
@@ -67,4 +68,13 @@ def create_expense_route():
     
 @app.route("/history", methods=["GET", "POST"])
 def history():
-    return render_template("history.html")
+    transaction_entries = get_transactions()
+    entries = sorted(transaction_entries, key=lambda entry: entry.date, reverse=True)
+    return render_template("history.html", entries=entries)
+
+@app.route("/delete", methods=["GET", "POST"])
+def delete_entry():
+    table_name = request.form.get('table_name')
+    id_entry = request.form.get('entry_id')
+    delete_transaction(table_name, id_entry)
+    return redirect("/history")
