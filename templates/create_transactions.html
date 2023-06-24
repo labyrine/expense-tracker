@@ -21,6 +21,7 @@
     </select>
     <br>
     <input type="submit" value="Lisää">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   </form>
   {% elif form_type == 'expense' %}
   <h1>Luo meno</h1>
@@ -39,8 +40,8 @@
     </select>
     <br>
     <input type="submit" value="Lisää">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   </form>
   {% endif %}
 </body>
 </html>
-

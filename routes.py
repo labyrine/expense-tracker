@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import users, create_transactions
 from history import get_transactions, delete_transaction
 
@@ -47,6 +47,8 @@ def create_income_route():
         amount = request.form.get('amount')
         date = request.form.get('date')
         income_category = request.form.get('income_category')
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template("error.html", message="Luvaton toiminto.")
         create_transactions.insert_income(amount, date, income_category, description)
         return redirect('/')
     else:
@@ -60,6 +62,8 @@ def create_expense_route():
         amount = request.form.get('amount')
         date = request.form.get('date')
         expense_category = request.form.get('expense_category')
+        if session["csrf_token"] != request.form["csrf_token"]:
+            return render_template("error.html", message="Luvaton toiminto.")
         create_transactions.insert_expense(amount, date, expense_category, description)
         return redirect('/')
     else:
@@ -76,5 +80,7 @@ def history():
 def delete_entry():
     table_name = request.form.get('table_name')
     id_entry = request.form.get('entry_id')
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Luvaton toiminto.")
     delete_transaction(table_name, id_entry)
     return redirect("/history")
