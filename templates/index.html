@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title>Etusivu</title>
+    <script>
+      function formatDecimal(value) {
+        return value.toFixed(2);
+      }
+    </script>
   </head>
   <body>
     <h1>Rahankäytön seuranta</h1>
@@ -13,10 +18,18 @@
         <p><i>Kirjautuneena:</i> <b>{{ message }}</b></p>
         <p>Kirjaudu ulos <a href="/logout">tästä</a></p>
         <p>Luo uusi</p>
-    <button onclick="location.href='/create_income'">Tulo</button>
-    <button onclick="location.href='/create_expense'">Meno</button>
+        <button onclick="location.href='/create_income'">Tulo</button>
+        <button onclick="location.href='/create_expense'">Meno</button>
         <p>Siirry katsomaan</p>
-    <button onclick="location.href='/history'">Hstoria</button>
+        <button onclick="location.href='/history'">Hstoria</button>
+        <p class="decimal-format">Tulot yhteensä: <span id="total-income">{{ total_income }}</span> €</p>
+        <p class="decimal-format">Menot yhteensä: <span id="total-expenses">{{ total_expenses }}</span> €</p>
+        <p class="decimal-format">{% if savings_debt >= 0 %}Säästöt{% else %}Vaje{% endif %}: <span id="savings-debt">{{ savings_debt }}</span> €</p>
+        <script>
+          document.getElementById("total-income").innerText = formatDecimal(parseFloat(document.getElementById("total-income").innerText));
+          document.getElementById("total-expenses").innerText = formatDecimal(parseFloat(document.getElementById("total-expenses").innerText));
+          document.getElementById("savings-debt").innerText = formatDecimal(parseFloat(document.getElementById("savings-debt").innerText));
+        </script>
     {% else %}
         <p>Kirjaudu sisään <a href="/login">tästä</a> jatkaaksesi</p>
     {% endif %}

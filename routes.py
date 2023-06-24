@@ -1,12 +1,15 @@
 from app import app
 from flask import render_template, request, redirect, session
-import users, create_transactions
+import users, create_transactions, frontpage
 from history import get_transactions, delete_transaction
 
 @app.route("/")
 def index():
     username = users.get_username()
-    return render_template("index.html", message=username)
+    total_income = frontpage.get_sum_of_income()
+    total_expenses = frontpage.get_sum_of_expenses()
+    savings_debt = frontpage.get_savings_or_debt()
+    return render_template("index.html", message=username, total_income=total_income, total_expenses=total_expenses, savings_debt=savings_debt)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
