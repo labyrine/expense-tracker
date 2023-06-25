@@ -27,6 +27,7 @@
               <input type="hidden" name="entry_id" value="{{ entry[5] }}">
               <input type="hidden" name="table_name" value="{% if entry[0] == 'Tulo' %}income{% else %}expenses{% endif %}">
               <button type="submit">Muokkaa</button>
+              <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             </form>
             <form action="/delete" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa merkinnän?')">
               <input type="hidden" name="entry_id" value="{{ entry[5] }}">
