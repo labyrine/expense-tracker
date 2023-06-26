@@ -22,6 +22,7 @@
         <button onclick="location.href='/create_expense'">Meno</button>
         <p>Siirry katsomaan</p>
         <button onclick="location.href='/history'">Hstoria</button>
+        <button onclick="location.href='/report'">Kuukausiraportti</button>
         <p class="decimal-format">Tulot yhteensä: <span id="total-income">{{ total_income }}</span> €</p>
         <p class="decimal-format">Menot yhteensä: <span id="total-expenses">{{ total_expenses }}</span> €</p>
         <p class="decimal-format">{% if savings_debt >= 0 %}Säästöt{% else %}Vaje{% endif %}: <span id="savings-debt">{{ savings_debt }}</span> €</p>

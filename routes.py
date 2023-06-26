@@ -141,3 +141,7 @@ def edit_expense():
             return render_template("error.html", message="Menoa ei löytynyt")
         expense_categories = create_transactions.get_expense_categories()
         return render_template('edit_transactions.html', form_type='expense', expense_categories=expense_categories, transaction=transaction)
+    
+@app.route("/report")
+def monthly_report():
+    return render_template("report.html")
