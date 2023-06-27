@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect, session, url_for
-import users, create_transactions, frontpage, report
+import users, create_transactions, frontpage, report, budget
 from history import get_transactions, delete_transaction, update_income, update_expense, get_transaction_by_id
 
 @app.route("/")
@@ -154,3 +154,31 @@ def monthly_report():
         monthly_category_expenses = report.monthly_category_report(start_date, end_date)
         return render_template('report.html', selected_month=month, selected_year=year, monthly_income=monthly_income, monthly_expenses=monthly_expenses, monthly_savings=monthly_savings, monthly_category_expenses=monthly_category_expenses)
     return render_template("report.html")
+
+@app.route('/month_budget', methods=['POST'])
+def handle_month_budget():
+    month = request.form.get('month')
+    year = request.form.get('year')
+    budget_amount = request.form.get('amount')
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Luvaton toiminto.")
+    start_date, end_date = report.get_start_and_end_date(month, year)
+    budget.insert_monthly_budget(start_date, end_date, budget_amount)
+    return redirect('/create_budget')
+
+@app.route('/category_budget', methods=['POST'])
+def handle_category_budget():
+    month = request.form.get('month')
+    year = request.form.get('year')
+    expense_category = request.form.get('expense_category')
+    budget_amount = request.form.get('amount')
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Luvaton toiminto.")
+    start_date, end_date = report.get_start_and_end_date(month, year)
+    budget.insert_monthly_category_budget(start_date, end_date, expense_category, budget_amount)
+    return redirect('/create_budget')
+
+@app.route('/create_budget')
+def create_budget_route():
+    expense_categories = create_transactions.get_expense_categories()
+    return render_template('budget.html', expense_categories=expense_categories)

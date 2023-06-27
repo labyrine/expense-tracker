@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Budjetti</title>
+  </head>
+  <body>
+    <h1>Luo kuukausibudjetti</h1>
+    <form method="POST" action="/month_budget" onsubmit="return confirm('Tämä toiminto korvaa mahdollisen edellisen budjetin. Haluatko jatkaa?')">
+        <label for="month">Kuukausi:</label>
+        <select name="month" id="month">
+            <option value="01">Tammikuu</option>
+            <option value="02">Helmikuu</option>
+            <option value="03">Maaliskuu</option>
+            <option value="04">Huhtikuu</option>
+            <option value="05">Toukokuu</option>
+            <option value="06">Kesäkuu</option>
+            <option value="07">Heinäkuu</option>
+            <option value="08">Elokuu</option>
+            <option value="09">Syyskuu</option>
+            <option value="10">Lokakuu</option>
+            <option value="11">Marraskuu</option>
+            <option value="12">Joulukuu</option>
+        </select>
+    
+        <label for="year">Vuosi:</label>
+        <select name="year" id="year">
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+        </select>
+        Budjetti: <input type="number" name="amount" step="0.01" min="0">
+        <button type="submit">Lähetä</button>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
+    <h1>Luo kuukausibudjetti kategorioille</h1>
+    <form method="POST" action="/category_budget" onsubmit="return confirm('Tämä toiminto korvaa mahdollisen edellisen budjetin. Haluatko jatkaa?')">
+        <label for="month">Kuukausi:</label>
+        <select name="month" id="month">
+            <option value="01">Tammikuu</option>
+            <option value="02">Helmikuu</option>
+            <option value="03">Maaliskuu</option>
+            <option value="04">Huhtikuu</option>
+            <option value="05">Toukokuu</option>
+            <option value="06">Kesäkuu</option>
+            <option value="07">Heinäkuu</option>
+            <option value="08">Elokuu</option>
+            <option value="09">Syyskuu</option>
+            <option value="10">Lokakuu</option>
+            <option value="11">Marraskuu</option>
+            <option value="12">Joulukuu</option>
+        </select>
+    
+        <label for="year">Vuosi:</label>
+        <select name="year" id="year">
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+        </select>
+        Kategoria:
+        <select name="expense_category">
+            {% for expense_category in expense_categories %}
+                <option value="{{ expense_category[0] }}">{{ expense_category[0] }}</option>
+            {% endfor %}
+        </select>
+        Budjetti: <input type="number" name="amount" step="0.01" min="0">
+        <button type="submit">Lähetä</button>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
+  </body>
+</html>
+    

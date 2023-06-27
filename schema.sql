@@ -27,6 +27,21 @@ CREATE TABLE expenses (
    expense_category TEXT REFERENCES expense_categories(expense_name),
    description TEXT
 );
+CREATE TABLE category_budget (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  expense_category TEXT REFERENCES expense_categories(expense_name),
+  budget_amount DECIMAL,
+  start_date DATE,
+  end_date DATE
+);
+CREATE TABLE monthly_budget (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  budget_amount DECIMAL,
+  start_date DATE,
+  end_date DATE
+);
 
 INSERT INTO income_categories (income_name) 
 VALUES ('Muu');
