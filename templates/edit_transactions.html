@@ -2,6 +2,15 @@
 <html>
 <head>
   <title>Muokkaa</title>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      var dateInput = document.getElementById('date');
+      var currentDate = new Date();
+      var currentYear = currentDate.getFullYear();
+      dateInput.min = currentYear >= 2020 ? currentYear + '-01-01' : '2020-01-01';
+      dateInput.max = currentYear <= 2030 ? currentYear + '-12-31' : '2030-12-31';
+    });
+  </script>
 </head>
 <body>
   {% if form_type == 'income' %}
@@ -9,11 +18,11 @@
   <form action="/edit_income" method="POST">
     <input type="hidden" name="table_name" value="income">
     <input type="hidden" name="entry_id" value="{{ transaction.id }}">
-    Kuvaus: <input type="text" name="description" value="{{ transaction.description }}">
+    Kuvaus: <input type="text" name="description" maxlength="50" value="{{ transaction.description }}">
     <br>
     Summa: <input type="number" name="amount" step="0.01" min="0" value="{{ transaction.amount }}">
     <br>
-    Päiväys: <input type="date" name="date" value="{{ transaction.date }}">
+    Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31" value="{{ transaction.date }}">
     <br>
     Kategoria:
     <select name="income_category">
@@ -30,11 +39,11 @@
   <form action="/edit_expense" method="POST">
     <input type="hidden" name="table_name" value="expenses">
     <input type="hidden" name="entry_id" value="{{ transaction.id }}">
-    Kuvaus: <input type="text" name="description" value="{{ transaction.description }}">
+    Kuvaus: <input type="text" name="description" maxlength="50" value="{{ transaction.description }}">
     <br>
     Summa: <input type="number" name="amount" step="0.01" min="0" value="{{ transaction.amount }}">
     <br>
-    Päiväys: <input type="date" name="date" value="{{ transaction.date }}">
+    Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31" value="{{ transaction.date }}">
     <br>
     Kategoria:
     <select name="expense_category">

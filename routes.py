@@ -128,6 +128,13 @@ def edit_income():
         amount = request.form.get('amount')
         date = request.form.get('date')
         income_category = request.form.get('income_category')
+        if len(description) > 50:
+            return render_template("error.html", message="Kuvaus saa olla korkeintaan 50 merkkiä pitkä")
+        if not create_transactions.valid_amount(amount):
+            return render_template("error.html", message="Virheellinen summa! Muista, että desimaaleja saa olla korkeintaan kaksi.")
+        date_real = datetime.datetime.strptime(date, '%Y-%m-%d')
+        if not (date_real.year in range(2020, 2031)):
+            return render_template("error.html", message="Vuoden pitää olla välillä 2020-2030")
         update_income(id_entry, amount, date, income_category, description)
         return redirect('/history')
     else:
@@ -149,6 +156,13 @@ def edit_expense():
         amount = request.form.get('amount')
         date = request.form.get('date')
         expense_category = request.form.get('expense_category')
+        if len(description) > 50:
+            return render_template("error.html", message="Kuvaus saa olla korkeintaan 50 merkkiä pitkä")
+        if not create_transactions.valid_amount(amount):
+            return render_template("error.html", message="Virheellinen summa! Muista, että desimaaleja saa olla korkeintaan kaksi.")
+        date_real = datetime.datetime.strptime(date, '%Y-%m-%d')
+        if not (date_real.year in range(2020, 2031)):
+            return render_template("error.html", message="Vuoden pitää olla välillä 2020-2030")
         update_expense(id_entry, amount, date, expense_category, description)
         return redirect('/history')
     else:
