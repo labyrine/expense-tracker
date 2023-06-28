@@ -27,3 +27,14 @@ def insert_expense(amount, date, expense_category, description):
     sql = text("INSERT INTO expenses (user_id, amount, date, expense_category, description) VALUES (:user_id, :amount, :date, :expense_category, :description)")
     db.session.execute(sql, {"user_id": user_id, "amount": amount, "date": date, "expense_category": expense_category, "description": description})
     db.session.commit()
+
+def valid_amount(amount):
+    try:
+        amount = float(amount)
+        if len(str(amount).split('.')[-1]) > 2:
+            return False
+        if amount < 0:
+            return False
+        return True
+    except ValueError:
+        return False

@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, request, redirect, session, url_for
 import users, create_transactions, frontpage, report, budget
 from history import get_transactions, delete_transaction, update_income, update_expense, get_transaction_by_id
+import datetime
 
 @app.route("/")
 def index():
@@ -54,6 +55,13 @@ def create_income_route():
         income_category = request.form.get('income_category')
         if session["csrf_token"] != request.form["csrf_token"]:
             return render_template("error.html", message="Luvaton toiminto.")
+        if len(description) > 50:
+            return render_template("error.html", message="Kuvaus saa olla korkeintaan 50 merkkiä pitkä")
+        if not create_transactions.valid_amount(amount):
+            return render_template("error.html", message="Virheellinen summa! Muista, että desimaaleja saa olla korkeintaan kaksi.")
+        date_real = datetime.datetime.strptime(date, '%Y-%m-%d')
+        if not (date_real.year in range(2020, 2031)):
+            return render_template("error.html", message="Vuoden pitää olla välillä 2020-2030")
         create_transactions.insert_income(amount, date, income_category, description)
         return redirect('/')
     else:
@@ -69,6 +77,13 @@ def create_expense_route():
         expense_category = request.form.get('expense_category')
         if session["csrf_token"] != request.form["csrf_token"]:
             return render_template("error.html", message="Luvaton toiminto.")
+        if len(description) > 50:
+            return render_template("error.html", message="Kuvaus saa olla korkeintaan 50 merkkiä pitkä")
+        if not create_transactions.valid_amount(amount):
+            return render_template("error.html", message="Virheellinen summa! Muista, että desimaaleja saa olla korkeintaan kaksi.")
+        date_real = datetime.datetime.strptime(date, '%Y-%m-%d')
+        if not (date_real.year in range(2020, 2031)):
+            return render_template("error.html", message="Vuoden pitää olla välillä 2020-2030")
         create_transactions.insert_expense(amount, date, expense_category, description)
         return redirect('/')
     else:

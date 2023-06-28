@@ -2,16 +2,25 @@
 <html>
 <head>
   <title>Luo</title>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      var dateInput = document.getElementById('date');
+      var currentDate = new Date();
+      var currentYear = currentDate.getFullYear();
+      dateInput.min = currentYear >= 2020 ? currentYear + '-01-01' : '2020-01-01';
+      dateInput.max = currentYear <= 2030 ? currentYear + '-12-31' : '2030-12-31';
+    });
+  </script>
 </head>
 <body>
   {% if form_type == 'income' %}
   <h1>Luo tulo</h1>
   <form action="/create_income" method="POST">
-    Kuvaus: <input type="text" name="description">
+    Kuvaus: <input type="text" name="description" maxlength="50">
     <br>
     Summa: <input type="number" name="amount" step="0.01" min="0">
     <br>
-    Päiväys: <input type="date" name="date">
+    Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31">
     <br>
     Kategoria:
     <select name="income_category">
@@ -26,11 +35,11 @@
   {% elif form_type == 'expense' %}
   <h1>Luo meno</h1>
   <form action="/create_expense" method="POST">
-    Kuvaus: <input type="text" name="description">
+    Kuvaus: <input type="text" name="description" maxlength="50">
     <br>
     Summa: <input type="number" name="amount" step="0.01" min="0">
     <br>
-    Päiväys: <input type="date" name="date">
+    Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31">
     <br>
     Kategoria:
     <select name="expense_category">
