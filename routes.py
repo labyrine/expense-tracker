@@ -152,7 +152,9 @@ def monthly_report():
         start_date, end_date = report.get_start_and_end_date(month, year)
         monthly_income, monthly_expenses, monthly_savings = report.monthly_transactions_report(start_date, end_date)
         monthly_category_expenses = report.monthly_category_report(start_date, end_date)
-        return render_template('report.html', selected_month=month, selected_year=year, monthly_income=monthly_income, monthly_expenses=monthly_expenses, monthly_savings=monthly_savings, monthly_category_expenses=monthly_category_expenses)
+        monthly_budget, budget_savings = report.monthly_budget_report(start_date, end_date)
+        category_budget_report = report.monthly_category_and_budget_report(start_date, end_date)
+        return render_template('report.html', selected_month=month, selected_year=year, monthly_income=monthly_income, monthly_expenses=monthly_expenses, monthly_savings=monthly_savings, monthly_category_expenses=monthly_category_expenses, monthly_budget=monthly_budget, budget_savings=budget_savings, category_budget_report=category_budget_report)
     return render_template("report.html")
 
 @app.route('/month_budget', methods=['POST'])

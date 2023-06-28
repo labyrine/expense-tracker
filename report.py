@@ -43,3 +43,38 @@ def monthly_category_report(start_date, end_date):
     db.session.commit()
     return (monthly_category_expenses)
 
+def monthly_budget_report(start_date, end_date):
+    user_id = users.user_id()
+    sql_budget = text("SELECT COALESCE(budget_amount, 0) FROM monthly_budget WHERE user_id = :user_id AND start_date = :start_date AND end_date = :end_date")
+    result_budget = db.session.execute(sql_budget, {"user_id": user_id, "start_date": start_date, "end_date": end_date})
+    row = result_budget.fetchone()
+    month_budget = row[0] if row else 0
+
+    sql_expenses = text("SELECT COALESCE(SUM(amount), 0) FROM expenses WHERE user_id = :user_id AND date BETWEEN :start_date AND :end_date")
+    result_expenses = db.session.execute(sql_expenses, {"user_id": user_id, "start_date": start_date, "end_date": end_date})
+    month_expenses = result_expenses.fetchone()[0]
+
+    budget_savings = month_budget - month_expenses 
+
+    db.session.commit()
+    return (month_budget, budget_savings)
+
+def monthly_category_and_budget_report(start_date, end_date):
+    user_id = users.user_id()
+    sql_report = text("""
+        SELECT ec.expense_name AS category,
+               cb.budget_amount AS budget,
+               COALESCE(SUM(e.amount), 0) AS expenses,
+               cb.budget_amount - COALESCE(SUM(e.amount), 0) AS savings
+        FROM expense_categories ec
+        INNER JOIN category_budget cb ON ec.expense_name = cb.expense_category
+        LEFT JOIN expenses e ON ec.expense_name = e.expense_category
+        WHERE cb.user_id = :user_id AND cb.start_date = :start_date AND cb.end_date = :end_date
+        AND e.user_id = :user_id AND e.date BETWEEN :start_date AND :end_date
+        GROUP BY ec.expense_name, cb.budget_amount
+    """)
+    result_report = db.session.execute(sql_report, {"user_id": user_id, "start_date": start_date, "end_date": end_date})
+    category_budget_report = result_report.fetchall()
+
+    db.session.commit()
+    return category_budget_report

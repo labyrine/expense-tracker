@@ -85,6 +85,36 @@
               </tr>
             {% endfor %}
           </table>
+          <h2>Kuukauden budjetti</h2>
+          <table>
+            <tr>
+              <th>Budjetti</th>
+              <th>Menot</th>
+              <th>Säästöt</th>
+            </tr>
+            <tr>
+              <td>{{ '%.2f'|format(monthly_budget) }} €</td>
+              <td>{{ '%.2f'|format(monthly_expenses) }} €</td>
+              <td>{{ '%.2f'|format(budget_savings) }} €</td>
+            </tr>
+          </table>
+          <h2>Budjetit kategorioittain</h2>
+          <table>
+            <tr>
+              <th>Kategoria</th>
+              <th>Budjetti</th>
+              <th>Menot</th>
+              <th>Säästöt</th>
+            </tr>
+            {% for category, budget, expenses, savings in category_budget_report %}
+              <tr>
+                <td>{{ category }}</td>
+                <td>{{ '%.2f'|format(budget) }} €</td>
+                <td>{{ '%.2f'|format(expenses) }} €</td>
+                <td>{{ '%.2f'|format(savings) }} €</td>
+              </tr>
+            {% endfor %}
+          </table>
         {% else %}
           <p>Ei menoja tältä kuukaudelta</p>
         {% endif %}
