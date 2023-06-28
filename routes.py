@@ -195,6 +195,8 @@ def handle_month_budget():
     budget_amount = request.form.get('amount')
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Luvaton toiminto.")
+    if not create_transactions.valid_amount(budget_amount):
+        return render_template("error.html", message="Virheellinen summa! Muista, että desimaaleja saa olla korkeintaan kaksi.")
     start_date, end_date = report.get_start_and_end_date(month, year)
     budget.insert_monthly_budget(start_date, end_date, budget_amount)
     return redirect('/create_budget')
@@ -207,6 +209,8 @@ def handle_category_budget():
     budget_amount = request.form.get('amount')
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Luvaton toiminto.")
+    if not create_transactions.valid_amount(budget_amount):
+        return render_template("error.html", message="Virheellinen summa! Muista, että desimaaleja saa olla korkeintaan kaksi.")
     start_date, end_date = report.get_start_and_end_date(month, year)
     budget.insert_monthly_category_budget(start_date, end_date, expense_category, budget_amount)
     return redirect('/create_budget')
