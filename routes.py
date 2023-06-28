@@ -37,7 +37,9 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
-        if len(username)==0 or len(password1)==0 or len(password2)==0:
+        if len(username) > 50:
+            return render_template("error.html", message="Nimi saa olla korkeintaan 50 merkkiä pitkä")
+        if len(username) == 0 or len(password1) == 0 or len(password2) == 0:
             return render_template("error.html", message="Käyttäjänimi tai salasana eivät voi olla tyhjiä")
         if password1 != password2:
             return render_template("error.html", message="Salasanat eroavat")
