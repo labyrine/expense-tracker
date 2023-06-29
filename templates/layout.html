@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rahankäytön seuranta - {% block title %}{% endblock %}</title>
+    <style>
+    body { 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        justify-content: flex-start; 
+        height: 100vh;
+        margin: 0;
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        background: rgb(65, 179, 163);
+    }
+    
+    .nav_box {
+        background: white;
+        width: 100%;
+        max-height: 50px; 
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 0 20px; 
+        margin-bottom: 20px; 
+    }
+
+    .main_box { 
+        background: white;
+        padding: 20px;
+        border: 1px solid black;
+        border-radius: .5em;
+        max-width: 45em;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+      .right_box {
+        background: white;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: .5em;
+        max-width: 45em;
+        text-align: center;
+        margin-bottom: 10px;
+        position: absolute;
+        top: 80px;
+        right: 10px;
+        margin-right: 20px;
+    }
+
+    input[type="submit"] { 
+        background: rgb(133, 220, 186);
+        padding: 5px 10px;
+        border: 1px solid black;
+        color: solid black;
+    }
+
+    .custom-button {
+        background: rgb(133, 220, 186);
+        padding: 5px 10px;
+        border: 1px solid black;
+        color: black;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    a.custom-button {
+        background: rgb(133, 220, 186);
+        padding: 5px 10px;
+        border: 1px solid black;
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a { 
+        color: rgb(195, 141, 158);
+        text-decoration: none;
+        font-weight: bold;
+    } 
+    </style>
+    </style>
+</head>
+<body>
+    <div class="nav_box">
+        <h1>Rahankäytön seuranta</h1> 
+        <a href="/">Etusivu</a>
+        <a href="/create_income">Luo tulo</a>
+        <a href="/create_expense">Luo meno</a> 
+        <a href="/create_budget">Luo budjetti</a> 
+        <a href="/history">Historia</a> 
+        <a href="/report">Kuukausiraportti</a>
+    </div>
+    {% block content %}{% endblock %}
+</body>
+</html> 

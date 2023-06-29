@@ -1,41 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Etusivu</title>
-    <script>
-      function formatDecimal(value) {
-        return value.toFixed(2);
-      }
-    </script>
-  </head>
-  <body>
-    <h1>Rahankäytön seuranta</h1>
-    <p>
-      <h1>Tervetuloa seuraamaan tulojasi ja menojasi!</h1>
-    </p>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
+    <h1>Tervetuloa seuraamaan tulojasi ja menojasi!</h1>
+
     {% if message %}
-        <p><i>Kirjautuneena:</i> <b>{{ message }}</b></p>
-        <p>Kirjaudu ulos <a href="/logout">tästä</a></p>
-        <p>Luo uusi</p>
-        <button onclick="location.href='/create_income'">Tulo</button>
-        <button onclick="location.href='/create_expense'">Meno</button>
-        <button onclick="location.href='/create_budget'">Budjetti</button>
-        <p>Siirry katsomaan</p>
-        <button onclick="location.href='/history'">Hstoria</button>
-        <button onclick="location.href='/report'">Kuukausiraportti</button>
-        <p class="decimal-format">Tulot yhteensä: <span id="total-income">{{ total_income }}</span> €</p>
-        <p class="decimal-format">Menot yhteensä: <span id="total-expenses">{{ total_expenses }}</span> €</p>
-        <p class="decimal-format">{% if savings_debt >= 0 %}Säästöt{% else %}Vaje{% endif %}: <span id="savings-debt">{{ savings_debt }}</span> €</p>
+        <div class="right_box">
+          <p><b>{{ message }}</b></p>
+          <a href="/logout" class="custom-button">Kirjaudu ulos</a>
+        </div>
+        <div class="main_box">
+          <h2>Yhteenveto</h2>
+          <p class="decimal-format">Tulot yhteensä: <span id="total-income">{{ total_income }}</span> €</p>
+          <p class="decimal-format">Menot yhteensä: <span id="total-expenses">{{ total_expenses }}</span> €</p>
+          <p class="decimal-format">{% if savings_debt >= 0 %}Säästöt{% else %}Vaje{% endif %}: <span id="savings-debt">{{ savings_debt }}</span> €</p>
+        </div>
+
         <script>
-          document.getElementById("total-income").innerText = formatDecimal(parseFloat(document.getElementById("total-income").innerText));
-          document.getElementById("total-expenses").innerText = formatDecimal(parseFloat(document.getElementById("total-expenses").innerText));
-          document.getElementById("savings-debt").innerText = formatDecimal(parseFloat(document.getElementById("savings-debt").innerText));
+            function formatDecimal(value) {
+                return value.toFixed(2);
+            }
+
+            document.getElementById("total-income").innerText = formatDecimal(parseFloat(document.getElementById("total-income").innerText));
+            document.getElementById("total-expenses").innerText = formatDecimal(parseFloat(document.getElementById("total-expenses").innerText));
+            document.getElementById("savings-debt").innerText = formatDecimal(parseFloat(document.getElementById("savings-debt").innerText));
         </script>
     {% else %}
         <p>Kirjaudu sisään <a href="/login">tästä</a> jatkaaksesi</p>
     {% endif %}
-  </body>
-</html>
+{% endblock %}
 
 
