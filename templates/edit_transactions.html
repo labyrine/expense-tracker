@@ -1,64 +1,74 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Muokkaa</title>
-  <script>
-    window.addEventListener('DOMContentLoaded', function() {
-      var dateInput = document.getElementById('date');
-      var currentDate = new Date();
-      var currentYear = currentDate.getFullYear();
-      dateInput.min = currentYear >= 2020 ? currentYear + '-01-01' : '2020-01-01';
-      dateInput.max = currentYear <= 2030 ? currentYear + '-12-31' : '2030-12-31';
-    });
-  </script>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}Muokkaa{% endblock %}
+{% block content %}
+
+<div class="main_box">
   {% if form_type == 'income' %}
   <h1>Muokkaa tuloa</h1>
   <form action="/edit_income" method="POST">
     <input type="hidden" name="table_name" value="income">
     <input type="hidden" name="entry_id" value="{{ transaction.id }}">
-    Kuvaus: <input type="text" name="description" maxlength="50" value="{{ transaction.description }}">
-    <br>
-    Summa: <input type="number" name="amount" step="0.01" min="0" value="{{ transaction.amount }}">
-    <br>
-    Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31" value="{{ transaction.date }}">
-    <br>
-    Kategoria:
-    <select name="income_category">
-      {% for income_category in income_categories %}
-      <option value="{{ income_category[0] }}" {% if income_category[0] == transaction.income_category %}selected{% endif %}>{{ income_category[0] }}</option>
-      {% endfor %}
-    </select>
-    <br>
-    <input type="submit" value="Tallenna">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <p>
+        Kuvaus: <input type="text" name="description" maxlength="50" value="{{ transaction.description }}">
+     </p>
+      <p>
+        Summa: <input type="number" name="amount" step="0.01" min="0" value="{{ transaction.amount }}">
+     </p>
+      <p>
+        Päiväys: <input type="date" name="date" id='income-date' min="2020-01-01" max="2030-12-31" value="{{ transaction.date }}">
+     </p>
+      <p>
+        Kategoria:
+        <select name="income_category">
+          {% for income_category in income_categories %}
+          <option value="{{ income_category[0] }}" {% if income_category[0] == transaction.income_category %}selected{% endif %}>{{ income_category[0] }}</option>
+          {% endfor %}
+        </select>
+      </p>
+      <p>
+        <input type="submit" value="Tallenna">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      </p>
   </form>
   {% elif form_type == 'expense' %}
   <h1>Muokkaa menoa</h1>
   <form action="/edit_expense" method="POST">
     <input type="hidden" name="table_name" value="expenses">
     <input type="hidden" name="entry_id" value="{{ transaction.id }}">
-    Kuvaus: <input type="text" name="description" maxlength="50" value="{{ transaction.description }}">
-    <br>
-    Summa: <input type="number" name="amount" step="0.01" min="0" value="{{ transaction.amount }}">
-    <br>
-    Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31" value="{{ transaction.date }}">
-    <br>
-    Kategoria:
-    <select name="expense_category">
-      {% for expense_category in expense_categories %}
-      <option value="{{ expense_category[0] }}" {% if expense_category[0] == transaction.expense_category %}selected{% endif %}>{{ expense_category[0] }}</option>
-      {% endfor %}
-    </select>
-    <br>
-    <input type="submit" value="Tallenna">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <p>
+        Kuvaus: <input type="text" name="description" maxlength="50" value="{{ transaction.description }}">
+      </p>
+      <p>
+        Summa: <input type="number" name="amount" step="0.01" min="0" value="{{ transaction.amount }}">
+      </p>
+      <p>
+        Päiväys: <input type="date" name="date" id='expense-date' min="2020-01-01" max="2030-12-31" value="{{ transaction.date }}">
+      </p>
+      <p>
+        Kategoria:
+        <select name="expense_category">
+          {% for expense_category in expense_categories %}
+          <option value="{{ expense_category[0] }}" {% if expense_category[0] == transaction.expense_category %}selected{% endif %}>{{ expense_category[0] }}</option>
+          {% endfor %}
+        </select>
+      </p>
+      <p>
+        <input type="submit" value="Tallenna">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      </p>
   </form>
   {% endif %}
-</body>
-</html>
+</div>
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+      var incomeDateInput = document.getElementById('income-date');
+      var expenseDateInput = document.getElementById('expense-date');
+      incomeDateInput.min = '2020-01-01';
+      incomeDateInput.max = '2030-12-31';
+      expenseDateInput.min = '2020-01-01';
+      expenseDateInput.max = '2030-12-31';
+  });
+</script>
 
-
-
+{% endblock %}
 
