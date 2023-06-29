@@ -55,8 +55,8 @@
         <button type="submit">Luo raportti</button>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
+    <h2>Taloustilanne</h2>
     {% if monthly_income is defined and monthly_expenses is defined and monthly_savings is defined %}
-        <h2>Taloustilanne</h2>
         <table>
           <tr>
             <th>Tulot</th>
@@ -68,58 +68,64 @@
             <td>{{ '%.2f'|format(monthly_expenses) }} €</td>
             <td>{{ '%.2f'|format(monthly_savings) }} €</td>
           </tr>
-        </table>                
-        {% if monthly_category_expenses %}
-          <h2>Menot kategorioittain</h2>
-          <table>
-            <tr>
-              <th>Kategoria</th>
-              <th>Menot</th>
-              <th>Prosenttiosuus</th>
-            </tr>
-            {% for category, expenses, percentage in monthly_category_expenses %}
-              <tr>
-                <td>{{ category }}</td>
-                <td>{{ '%.2f'|format(expenses) }} €</td>
-                <td>{{ '%.2f'|format(percentage) }}%</td>
-              </tr>
-            {% endfor %}
-          </table>
-          <h2>Kuukauden budjetti</h2>
-          <table>
-            <tr>
-              <th>Budjetti</th>
-              <th>Menot</th>
-              <th>Säästöt</th>
-            </tr>
-            <tr>
-              <td>{{ '%.2f'|format(monthly_budget) }} €</td>
-              <td>{{ '%.2f'|format(monthly_expenses) }} €</td>
-              <td>{{ '%.2f'|format(budget_savings) }} €</td>
-            </tr>
-          </table>
-          <h2>Budjetit kategorioittain</h2>
-          <table>
-            <tr>
-              <th>Kategoria</th>
-              <th>Budjetti</th>
-              <th>Menot</th>
-              <th>Säästöt</th>
-            </tr>
-            {% for category, budget, expenses, savings in category_budget_report %}
-              <tr>
-                <td>{{ category }}</td>
-                <td>{{ '%.2f'|format(budget) }} €</td>
-                <td>{{ '%.2f'|format(expenses) }} €</td>
-                <td>{{ '%.2f'|format(savings) }} €</td>
-              </tr>
-            {% endfor %}
-          </table>
-        {% else %}
-          <p>Ei menoja tältä kuukaudelta</p>
-        {% endif %}
-      {% else %}
-        <p>Ei menoja tältä kuukaudelta</p>
+        </table>  
     {% endif %}
+    <h2>Menot kategorioittain</h2>              
+    {% if monthly_category_expenses %}
+      <table>
+        <tr>
+          <th>Kategoria</th>
+          <th>Menot</th>
+          <th>Prosenttiosuus</th>
+        </tr>
+        {% for category, expenses, percentage in monthly_category_expenses %}
+        <tr>
+          <td>{{ category }}</td>
+          <td>{{ '%.2f'|format(expenses) }} €</td>
+          <td>{{ '%.2f'|format(percentage) }}%</td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>Sinulla ei ole tuloja tässä kuussa joten raporttia ei voitu muodostaa.</p>
+    {% endif %}
+    <h2>Kuukauden budjetti</h2>
+    {% if monthly_budget %}
+      <table>
+        <tr>
+          <th>Budjetti</th>
+          <th>Menot</th>
+          <th>Säästöt</th>
+        </tr>
+        <tr>
+          <td>{{ '%.2f'|format(monthly_budget) }} €</td>
+          <td>{{ '%.2f'|format(monthly_expenses) }} €</td>
+          <td>{{ '%.2f'|format(budget_savings) }} €</td>
+        </tr>
+      </table>
+    {% else %}
+      <p>Et ole määrittänyt budjettia tälle kuulle joten raporttia ei voitu muodostaa.</p>
+    {% endif %}
+      <h2>Budjetit kategorioittain</h2>
+      {% if category_budget_report %}
+        <table>
+          <tr>
+            <th>Kategoria</th>
+            <th>Budjetti</th>
+            <th>Menot</th>
+            <th>Säästöt</th>
+          </tr>
+          {% for category, budget, expenses, savings in category_budget_report %}
+          <tr>
+            <td>{{ category }}</td>
+            <td>{{ '%.2f'|format(budget) }} €</td>
+            <td>{{ '%.2f'|format(expenses) }} €</td>
+            <td>{{ '%.2f'|format(savings) }} €</td>
+          </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <p>Et ole määrittänyt kategorialle budjettia tässä kuussa tai et ole ostanut mitään tässä kuussa, mikä kuuluisi tekemääsi budjettiin. Siksi raporttia ei voitu muodostaa.</p>
+      {% endif %}
   </body>
 </html>
