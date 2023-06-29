@@ -7,7 +7,7 @@ def insert_monthly_budget(start_date, end_date, budget_amount):
     if user_id == 0:
         return False
     
-    sql_existing_budget = text("SELECT * FROM monthly_budget WHERE user_id = :user_id AND start_date = :start_date AND end_date = :end_date")
+    sql_existing_budget = text("SELECT id, user_id, budget_amount, start_date, end_date FROM monthly_budget WHERE user_id = :user_id AND start_date = :start_date AND end_date = :end_date")
     existing_budget = db.session.execute(sql_existing_budget, {"user_id": user_id, "start_date": start_date, "end_date": end_date}).fetchone()
 
     if existing_budget:
@@ -24,7 +24,7 @@ def insert_monthly_category_budget(start_date, end_date, expense_category, budge
     if user_id == 0:
         return False
     
-    sql_existing_budget = text("SELECT * FROM category_budget WHERE user_id = :user_id AND start_date = :start_date AND end_date = :end_date AND expense_category = :expense_category")
+    sql_existing_budget = text("SELECT id, user_id, expense_category, budget_amount, start_date, end_date FROM category_budget WHERE user_id = :user_id AND start_date = :start_date AND end_date = :end_date AND expense_category = :expense_category")
     existing_budget = db.session.execute(sql_existing_budget, {"user_id": user_id, "start_date": start_date, "end_date": end_date, "expense_category": expense_category}).fetchone()
 
     if existing_budget:

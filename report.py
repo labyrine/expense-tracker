@@ -24,8 +24,6 @@ def monthly_transactions_report(start_date, end_date):
     result_savings = db.session.execute(sql_savings, {"user_id": user_id, "start_date": start_date, "end_date": end_date})
     month_savings = result_savings.fetchone()[0]
 
-    db.session.commit()
-
     return (month_income, month_expenses, month_savings)
 
 def monthly_category_report(start_date, end_date):
@@ -40,7 +38,6 @@ def monthly_category_report(start_date, end_date):
         percentage = (expenses / total_expenses) * 100
         monthly_category_expenses[i] = (category, expenses, percentage)
 
-    db.session.commit()
     return (monthly_category_expenses)
 
 def monthly_budget_report(start_date, end_date):
@@ -56,7 +53,6 @@ def monthly_budget_report(start_date, end_date):
 
     budget_savings = month_budget - month_expenses 
 
-    db.session.commit()
     return (month_budget, budget_savings)
 
 def monthly_category_and_budget_report(start_date, end_date):
