@@ -1,56 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Luo</title>
-  <script>
-    window.addEventListener('DOMContentLoaded', function() {
-      var dateInput = document.getElementById('date');
-      var currentDate = new Date();
-      var currentYear = currentDate.getFullYear();
-      dateInput.min = currentYear >= 2020 ? currentYear + '-01-01' : '2020-01-01';
-      dateInput.max = currentYear <= 2030 ? currentYear + '-12-31' : '2030-12-31';
-    });
-  </script>
-</head>
-<body>
-  {% if form_type == 'income' %}
-  <h1>Luo tulo</h1>
-  <form action="/create_income" method="POST">
-    Kuvaus: <input type="text" name="description" maxlength="50">
-    <br>
-    Summa: <input type="number" name="amount" step="0.01" min="0">
-    <br>
-    Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31">
-    <br>
-    Kategoria:
-    <select name="income_category">
-      {% for income_category in income_categories %}
-      <option value="{{ income_category[0] }}">{{ income_category[0] }}</option>
-      {% endfor %}
-    </select>
-    <br>
-    <input type="submit" value="Lisää">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-  </form>
-  {% elif form_type == 'expense' %}
-  <h1>Luo meno</h1>
-  <form action="/create_expense" method="POST">
-    Kuvaus: <input type="text" name="description" maxlength="50">
-    <br>
-    Summa: <input type="number" name="amount" step="0.01" min="0">
-    <br>
-    Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31">
-    <br>
-    Kategoria:
-    <select name="expense_category">
-      {% for expense_category in expense_categories %}
-      <option value="{{ expense_category[0] }}">{{ expense_category[0] }}</option>
-      {% endfor %}
-    </select>
-    <br>
-    <input type="submit" value="Lisää">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-  </form>
-  {% endif %}
-</body>
-</html>
+{% extends "layout.html" %}
+{% block title %}Luo{% endblock %}
+{% block content %}
+
+<div class="main_box">
+    {% if form_type == 'income' %}
+    <h1>Luo tulo</h1>
+    <form action="/create_income" method="POST">
+      <p>
+        Kuvaus: <input type="text" name="description" maxlength="50">
+      </p>
+      <p>
+        Summa: <input type="number" name="amount" step="0.01" min="0">
+      </p>
+      <p>
+        Päiväys: <input type="date" name="date" id='income-date' min="2020-01-01" max="2030-12-31">
+      </p>
+      <p>
+        Kategoria:
+        <select name="income_category">
+            {% for income_category in income_categories %}
+            <option value="{{ income_category[0] }}">{{ income_category[0] }}</option>
+            {% endfor %}
+        </select>
+      </p>
+      <p>
+        <input type="submit" value="Lisää" class="custom-button">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      </p>
+    </form>
+    {% elif form_type == 'expense' %}
+    <h1>Luo meno</h1>
+    <form action="/create_expense" method="POST">
+      <p>
+        Kuvaus: <input type="text" name="description" maxlength="50">
+      </p>
+      <p>
+        Summa: <input type="number" name="amount" id='expense-date' step="0.01" min="0">
+      </p>
+      <p>
+        Päiväys: <input type="date" name="date" min="2020-01-01" max="2030-12-31">
+      </p>
+      <p>
+        Kategoria:
+        <select name="expense_category">
+            {% for expense_category in expense_categories %}
+            <option value="{{ expense_category[0] }}">{{ expense_category[0] }}</option>
+            {% endfor %}
+        </select>
+      </p>
+      <p>
+        <input type="submit" value="Lisää" class="custom-button">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      </p>
+    </form>
+    {% endif %}
+</div>
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+      var incomeDateInput = document.getElementById('income-date');
+      var expenseDateInput = document.getElementById('expense-date');
+      incomeDateInput.min = '2020-01-01';
+      incomeDateInput.max = '2030-12-31';
+      expenseDateInput.min = '2020-01-01';
+      expenseDateInput.max = '2030-12-31';
+  });
+</script>
+
+{% endblock %}
