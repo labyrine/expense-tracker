@@ -1,43 +1,45 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Historia</title>
-  </head>
-  <body>
-    <h1>Historia</h1>
-    <table>
-      <tr>
-          <th>Tyyppi</th>
-          <th>Päiväys</th>
-          <th>Kuvaus</th>
-          <th>Summa</th>
-          <th>Kategoria</th>
-          <th>Toiminnot</th>
-      </tr>
-      {% for entry in entries %}
-      <tr>
-          <td>{{ entry[0] }}</td>
-          <td>{{ entry[1] }}</td>
-          <td>{{ entry[2] }}</td>
-          <td>{{ entry[3] }}</td>
-          <td>{{ entry[4] }}</td>
-          <td>
-            <form action="/edit" method="POST">
-              <input type="hidden" name="entry_id" value="{{ entry[5] }}">
-              <input type="hidden" name="table_name" value="{% if entry[0] == 'Tulo' %}income{% else %}expenses{% endif %}">
-              <button type="submit">Muokkaa</button>
-              <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            </form>
-            <form action="/delete" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa merkinnän?')">
-              <input type="hidden" name="entry_id" value="{{ entry[5] }}">
-              <input type="hidden" name="table_name" value="{% if entry[0] == 'Tulo' %}income{% else %}expenses{% endif %}">
-              <button type="submit">Poista</button>
-              <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            </form>
-          </td>
-      </tr>
-      {% endfor %}
-  </table>
-  </body>
-</html>
+{% extends "layout.html" %}
+{% block title %}Historia{% endblock %}
+{% block content %}
+<div class="main_box">
+   <h1>Historia</h1>
+</div>
+   <div class="main_box">
+   <table>
+       <tr>
+           <th>Tyyppi</th>
+           <th>Päiväys</th>
+           <th>Kuvaus</th>
+           <th>Summa</th>
+           <th>Kategoria</th>
+           <th>Muokkaa</th>
+           <th>Poista</th>
+       </tr>
+       {% for entry in entries %}
+       <tr>
+           <td class="column-box">{{ entry[0] }}</td>
+           <td class="column-box">{{ entry[1] }}</td>
+           <td class="column-box">{{ entry[2] }}</td>
+           <td class="column-box">{{ entry[3] }}</td>
+           <td class="column-box">{{ entry[4] }}</td>
+           <td class="column-box">
+               <form action="/edit" method="POST">
+                   <input type="hidden" name="entry_id" value="{{ entry[5] }}">
+                   <input type="hidden" name="table_name" value="{% if entry[0] == 'Tulo' %}income{% else %}expenses{% endif %}">
+                   <button type="submit" class="custom-button">Muokkaa</button>
+                   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+               </form>
+           </td>
+           <td class="column-box">
+               <form action="/delete" method="POST" onsubmit="return confirm('Haluatko varmasti poistaa merkinnän?')">
+                   <input type="hidden" name="entry_id" value="{{ entry[5] }}">
+                   <input type="hidden" name="table_name" value="{% if entry[0] == 'Tulo' %}income{% else %}expenses{% endif %}">
+                   <button type="submit" class="custom-button">Poista</button>
+                   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+               </form>
+           </td>
+       </tr>
+       {% endfor %}
+   </table>
+   </div>
+{% endblock %}
