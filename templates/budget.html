@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Budjetti</title>
-  </head>
-  <body>
+{% extends "layout.html" %}
+{% block title %}Budjetti{% endblock %}
+{% block content %}
+<div class="main_box">
     <h1>Luo kuukausibudjetti</h1>
     <form method="POST" action="/month_budget" onsubmit="return confirm('Tämä toiminto korvaa mahdollisen edellisen budjetin. Haluatko jatkaa?')">
         <label for="month">Kuukausi:</label>
@@ -22,7 +19,7 @@
             <option value="11">Marraskuu</option>
             <option value="12">Joulukuu</option>
         </select>
-    
+
         <label for="year">Vuosi:</label>
         <select name="year" id="year">
             <option value="2020">2020</option>
@@ -38,9 +35,11 @@
             <option value="2030">2030</option>
         </select>
         Budjetti: <input type="number" name="amount" step="0.01" min="0">
-        <button type="submit">Lähetä</button>
+        <button type="submit" class="custom-button">Lähetä</button>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
+</div>
+<div class="main_box">
     <h1>Luo kuukausibudjetti kategorioille</h1>
     <form method="POST" action="/category_budget" onsubmit="return confirm('Tämä toiminto korvaa mahdollisen edellisen budjetin. Haluatko jatkaa?')">
         <label for="month">Kuukausi:</label>
@@ -58,7 +57,7 @@
             <option value="11">Marraskuu</option>
             <option value="12">Joulukuu</option>
         </select>
-    
+
         <label for="year">Vuosi:</label>
         <select name="year" id="year">
             <option value="2020">2020</option>
@@ -80,9 +79,8 @@
             {% endfor %}
         </select>
         Budjetti: <input type="number" name="amount" step="0.01" min="0">
-        <button type="submit">Lähetä</button>
+        <button type="submit" class="custom-button">Lähetä</button>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
-  </body>
-</html>
-    
+</div>
+{% endblock %}
