@@ -30,6 +30,11 @@ Budjetti
 **Muuta**
 - Valitsin vuodet raportin muodostamiseen siten, että sovellukseen voi syöttää vanhempiakin tuloja ja menoja ja saada niistä raportin. Tämä olisi hyödyksi, jos on esimerkiksi säästänyt kuitteja. Halusin myös, että sovellus toimisi sellaisenaan pitkään ja siksi valitsin vähän umpimähkään viimeiseksi vuodeksi 2020.
 
+**Parannettavaa**
+- Kirjaudu ja rekisteröidy sivut eivät käytä muille html-tiedostoille yhteistä layout-tiedostoa
+- Etusivulla kirjaudu ulos teksti voi tulla muun tiedon päälle riippuen ikkunan koosta
+- Ohjelmointityylin parantaminen
+
 **Ohjeet sovelluksen testaamiseen - sovellus toimii vain paikallisesti**
 
 Kloonaa tämä repositorio omalle koneellesi komennolla<br>
