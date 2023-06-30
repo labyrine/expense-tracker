@@ -7,19 +7,30 @@
 **Sovelluksen toimivia ominaisuuksia**
 
 Kirjaudu ja rekisteröidy
-- Käyttäjä voi kirjautua sisään ja ulos sekä luoda uuden tunnuksen
+
+- Käyttäjä voi kirjautua sisään ja ulos sekä luoda uuden tunnuksen<br>
+
 Etusivu
-- Näyttää kaikki tulot yhteensä, kaikki menot yhteensä ja niiden erotus.
+
+- Näyttää kaikki tulot yhteensä, kaikki menot yhteensä ja niiden erotus.<br>
+
 Menon ja tulon luominen
-- Käyttäjä voi luoda uuden menon tai tulon antamalla summan, päivämäärän, kategorian ja kuvauksen
+
+- Käyttäjä voi luoda uuden menon tai tulon antamalla summan, päivämäärän, kategorian ja kuvauksen<br>
+
 Historia
--Käyttäjä näkee listan antamistaan tuloista ja menoista
+
+- Käyttäjä näkee listan antamistaan tuloista ja menoista
 - Käyttäjä voi muokata aiemmin tallentamaansa menoa tai tuloa 
-- Käyttäjä voi poistaa tallentamansa menon tai tulon 
+- Käyttäjä voi poistaa tallentamansa menon tai tulon<br>
+  
 Kuukausiraportti
+
 - Käyttäjä voi katsoa kulujensa kuukausiraportin, johon kuuluu menojen sekä tulojen omat summat, paljonko on kuukaudessa plussalla tai miinuksella sekä kategorioiden prosenttiosuudet kuukauden menoista.
-- Käyttäjä voi nähdä asettamansa budjetin valitsemalleen kuukaudelle ja sen vieressä kuukauden menot ja tiedon siitä onko budjettia ylitetty. Samoin hän voi nähdä kategorialle kuukaudeksi annetun budjetin, kyseisen kategorian kulut yhteensä ja onko budjettia ylitetty vai ei.
+- Käyttäjä voi nähdä asettamansa budjetin valitsemalleen kuukaudelle ja sen vieressä kuukauden menot ja tiedon siitä onko budjettia ylitetty. Samoin hän voi nähdä kategorialle kuukaudeksi annetun budjetin, kyseisen kategorian kulut yhteensä ja onko budjettia ylitetty vai ei.<br>
+
 Budjetti
+
 - Käyttäjä voi asettaa itselleen budjetin tietylle kuukaudelle tai kategorialle tietyksi kuukaudeksi.
 
 **Alkuperäisestä suunnitelmasta puuttuvat asiat**
@@ -96,7 +107,7 @@ Sovelluksen voi käynnistää komennolla<br>
 - Budjetin määrä
 - Aloituspäivä
 - Lopetuspäivä
-- 
+  
 7. Kategoria-budjetti
 - Budjetti id
 - Käyttäjä id (Taulusta 1)
