@@ -8,6 +8,8 @@
 
 Kirjaudu ja rekisteröidy
 - Käyttäjä voi kirjautua sisään ja ulos sekä luoda uuden tunnuksen
+Etusivu
+- Näyttää kaikki tulot yhteensä, kaikki menot yhteensä ja niiden erotus.
 Menon ja tulon luominen
 - Käyttäjä voi luoda uuden menon tai tulon antamalla summan, päivämäärän, kategorian ja kuvauksen
 Historia
@@ -21,11 +23,14 @@ Budjetti
 - Käyttäjä voi asettaa itselleen budjetin tietylle kuukaudelle tai kategorialle tietyksi kuukaudeksi.
 
 **Alkuperäisestä suunnitelmasta puuttuvat asiat**
--- Historia: Käyttäjä voi etsiä tiettyä menoa tai tuloa suodattamalla summan, päivämäärän, kategorian tai kuvauksen perusteella.
+- Historia: Käyttäjä voi etsiä tiettyä menoa tai tuloa suodattamalla summan, päivämäärän, kategorian tai kuvauksen perusteella.
 - Käyttäjä voi hakea keskivertokulutuksen päivän, kuukauden sekä kategorian mukaan.
 - Taulu, jonka tarkoitus oli säilyttää viestejä, joita kutsuttaisiin, kun käyttäjä ylittää budjetin.
 
-**Ohjeet sovelluksen testaamiseen**
+**Muuta**
+- Valitsin vuodet raportin muodostamiseen siten, että sovellukseen voi syöttää vanhempiakin tuloja ja menoja ja saada niistä raportin. Tämä olisi hyödyksi, jos on esimerkiksi säästänyt kuitteja. Halusin myös, että sovellus toimisi sellaisenaan pitkään ja siksi valitsin vähän umpimähkään viimeiseksi vuodeksi 2020.
+
+**Ohjeet sovelluksen testaamiseen - sovellus toimii vain paikallisesti**
 
 Kloonaa tämä repositorio omalle koneellesi komennolla<br>
 $ git clone https://github.com/labyrine/expense-tracker.<br> 
